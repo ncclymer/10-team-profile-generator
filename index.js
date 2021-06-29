@@ -13,41 +13,69 @@ function initIndex() {
 
 function addEmp() {
     inquirer.prompt([{
-        message: "Please enter employee name.",
+        type: "input",
+        message: "Please enter the manager's name.",
         name: "name"
     },
     {
-        type: "list",
-        message: "Please select employee role:",
-        choices: [
-            "intern",
-            "engineer",
-            "manager"
-        ],
-        name: "role"
-    },
-    {
-        message: "Please enter the employee id.",
+        type: "input",
+        message: "Please enter the manger's id.",
         name: "id"
     },
     {
-        message: "Please enter the employee email address.",
+        type: "input",
+        message: "Please enter the manager's email address.",
         name: "email"
-    }])
+    },
+    {
+        type: "input",
+        message: "Please enter the manager's office phone number.",
+        name: "phone"
+    },
+    {
+        type: "list",
+        message: "Would you like to add an:",
+        choices: [
+            "intern",
+            "engineer",
+            "Done building team."
+        ],
+        name: "role"
+    }
+    ])
         .then(function ({ name, role, id, email }) {
+            switch (role) {
+                case 'intern':
+                    inquirer.prompt({
+                        type: 'input',
+                        message: "what is your school name?",
+                        name: 'school'
+                    })
+                    .then(function ({ school }) {
+                        additionalEmp(name, role, id, email, school)
+                    })
+                    break
+                case 'engineer':
+                    inquirer.prompt({
+                        type: 'input',
+                        message: "what is your github user name?",
+                        name: 'github'
+                    }).then(function ({ github }) {
+                        addEngineer(name, role, id, email, github)
+                    })
+                    break
+            }
+
             let roleData = "";
             if (role === "intern") {
                 roleData = "school name";
             } else if (role === "engineer") {
-                roleData = "GitHub user name";
+                roleData = "github";
             } else {
-                roleData = "office phone number";
+                roleData = "phone";
             }
             inquirer.prompt([{
-                message: `Please enter employee ${roleData}`,
-                name: "roleData"
-            },
-            {
+
                 type: "list",
                 message: "Are there additional employees to add?",
                 choices: [
@@ -77,6 +105,7 @@ function addEmp() {
                 });
         });
 }
+
 
 function initHtml() {
     const html = `<!DOCTYPE html>
@@ -116,7 +145,7 @@ function newHtml(member) {
                 <h5 class="card-header">${name}<br /><br />Intern</h5>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">ID: ${id}</li>
-                    <li class="list-group-item">Email Address:<a href="mailto:${email}"></a></li>
+                    <li class="list-group-item">Email Address: <a href="mailto:${email}">${email}</a></li>
                     <li class="list-group-item">School: ${school}</li>
                 </ul>
                 </div>
@@ -128,8 +157,8 @@ function newHtml(member) {
                 <h5 class="card-header">${name}<br /><br />Engineer</h5>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">ID: ${id}</li>
-                    <li class="list-group-item">Email Address: ${email}</li>
-                    <li class="list-group-item">GitHub: ${gitHub}</li>
+                    <li class="list-group-item">Email Address: <a href="mailto:${email}">${email}</a></li>
+                    <li class="list-group-item">GitHub: <a href="https://github.com/${gitHub}" target="_blank">${gitHub}</a></li>
                 </ul>
                 </div>
             </div>`;
@@ -140,7 +169,7 @@ function newHtml(member) {
                 <h5 class="card-header">${name}<br /><br />Manager</h5>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">ID: ${id}</li>
-                    <li class="list-group-item">Email Address: ${email}</li>
+                    <li class="list-group-item">Email Address: <a href="mailto:${email}">${email}</a></li>
                     <li class="list-group-item">Office Phone: ${officePhone}</li>
                 </ul>
                 </div>
