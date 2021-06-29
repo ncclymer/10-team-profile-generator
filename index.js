@@ -10,7 +10,7 @@ const generateTeam = [{
     type: "input",
     name: "managerName",
     message: "What is the Manager's name?",
- 
+
 },
 {
     type: "input",
@@ -33,18 +33,18 @@ const generateTeam = [{
 ];
 
 const addNewEmployee = [{
-type: "list",
-name: "empAdd",
-message: "Would you like to add another employee?",
-choices: ["Yes", "No"],
-}, ];
+    type: "list",
+    name: "empAdd",
+    message: "Would you like to add another employee?",
+    choices: ["Yes", "No"],
+},];
 
 const employeeType = [{
-type: "list",
-name: "typeEmp",
-message: "Would you like to add an employee to your team?",
-choices: ["Engineer", "Intern"],
-}, ];
+    type: "list",
+    name: "typeEmp",
+    message: "Would you like to add an employee to your team?",
+    choices: ["Engineer", "Intern"],
+},];
 
 const questionEngineer = [{
     type: "input",
@@ -90,80 +90,80 @@ const questionIntern = [{
 ];
 
 function writeToFile(fileName, f) {
-fs.writeFileSync(fileName, f, (error) => {
-    error ? console.log(err) : console.log("Your team's profile is ready to view!");
-});
+    fs.writeFileSync(fileName, f, (error) => {
+        error ? console.log(err) : console.log("Your team's profile is ready to view!");
+    });
 }
 
 function newIntern() {
-inquirer.prompt(questionIntern).then((res) => {
-    employee.push(new Intern(res.intName, res.intId, res.intEmail, res.intSchool));
-    addEmployees();
-});
+    inquirer.prompt(questionIntern).then((res) => {
+        employee.push(new Intern(res.intName, res.intId, res.intEmail, res.intSchool));
+        addEmployees();
+    });
 }
 
 function newEngineer() {
-inquirer.prompt(questionEngineer).then((res) => {
-    employee.push(
-        new Engineer(res.engName, res.engId, res.engEmail, res.engGithub)
-    );
-    addEmployees();
-});
+    inquirer.prompt(questionEngineer).then((res) => {
+        employee.push(
+            new Engineer(res.engName, res.engId, res.engEmail, res.engGithub)
+        );
+        addEmployees();
+    });
 }
 
 function newEmployee() {
-inquirer.prompt(employeeType).then((res) => {
-    console.log(res);
-    res.typeEmp === "Engineer" ? newEngineer() : newIntern();
-});
+    inquirer.prompt(employeeType).then((res) => {
+        console.log(res);
+        res.typeEmp === "Engineer" ? newEngineer() : newIntern();
+    });
 }
 
 function addEmployees() {
-inquirer.prompt(addNewEmployee).then((res) => {
-    res.empAdd === "Yes" ? newEmployee() : writeToFile("./home/roster.html", teamProfile(employee));
-});
+    inquirer.prompt(addNewEmployee).then((res) => {
+        res.empAdd === "Yes" ? newEmployee() : writeToFile("./home/roster.html", teamProfile(employee));
+    });
 }
 
 function init() {
-            inquirer.prompt(generateTeam).then((res) => {
-                employee.push(
-                    new Manager(
-                        res.managerName,
-                        res.managerId,
-                        res.managerEmail,
-                        res.managerPhone
-                    )
-                );
-                addEmployees();
-            }
-            );
-        }
+    inquirer.prompt(generateTeam).then((res) => {
+        employee.push(
+            new Manager(
+                res.managerName,
+                res.managerId,
+                res.managerEmail,
+                res.managerPhone
+            )
+        );
+        addEmployees();
+    }
+    );
+}
 init();
 
 function genEmployees(employee) {
-let htmlMain = "";
-employee.forEach((obj) => {
-    switch (obj.getRole()) {
-        case "Engineer":
-            let stringDataEng = genEngineer(obj);
-            htmlMain += stringDataEng;
-            break;
-        case "Intern":
-            let stringDataInt = genIntern(obj);
-            htmlMain += stringDataInt;
-            break;
-        default:
-            return "";
-    }
-});
-return htmlMain;
+    let htmlMain = "";
+    employee.forEach((obj) => {
+        switch (obj.getRole()) {
+            case "Engineer":
+                let stringDataEng = genEngineer(obj);
+                htmlMain += stringDataEng;
+                break;
+            case "Intern":
+                let stringDataInt = genIntern(obj);
+                htmlMain += stringDataInt;
+                break;
+            default:
+                return "";
+        }
+    });
+    return htmlMain;
 }
 
 function genManager(employee) {
-let managerData = "";
-employee.forEach((obj) => {
-    if (obj.getRole() === "Manager") {
-        managerData = `			
+    let managerData = "";
+    employee.forEach((obj) => {
+        if (obj.getRole() === "Manager") {
+            managerData = `			
     <div class="row center-align">
     <div class="col s12 m4 offset-m4">
         <div class="card blue center-align">
@@ -180,15 +180,15 @@ employee.forEach((obj) => {
     </div>
     </div>
         `;
-    } else {
-        return "";
-    }
-});
-return managerData;
+        } else {
+            return "";
+        }
+    });
+    return managerData;
 }
 
 function genEngineer(obj) {
-return `			
+    return `			
 <div class="row center-align">
 <div class="col s12 m4 offset-m4">
 <div class="card blue center-align">
@@ -198,7 +198,7 @@ return `
   </div>
   <div class="card-action">
     <a href="#">${obj.getId()}</a>
-    <a href="#">${obj.getEmail()}</a>
+    <a href="mailto:${obj.getEmail()}">${obj.getEmail()}</a>
     <a href="https://www.github.com/${obj.getGitHub()}" target="_blank">${obj.getGitHub()}</a>
   </div>
 </div>
@@ -208,7 +208,7 @@ return `
 }
 
 function genIntern(obj) {
-return `			
+    return `			
 <div class="row center-align">
 <div class="col s12 m4 offset-m4">
 <div class="card blue center-align">
@@ -218,7 +218,7 @@ return `
   </div>
   <div class="card-action">
     <a href="#">${obj.getId()}</a>
-    <a href="#">${obj.getEmail()}</a>
+    <a href="mailto:${obj.getEmail()}">${obj.getEmail()}</a>
     <a href="#">${obj.getSchool()}</a>
   </div>
 </div>
@@ -228,7 +228,7 @@ return `
 }
 
 function teamProfile(employee) {
-return `
+    return `
 <!DOCTYPE html>
 <html lang="en">
 <head>
