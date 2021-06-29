@@ -173,7 +173,7 @@ employee.forEach((obj) => {
             </div>
             <div class="card-action">
                 <a href="#">${obj.getId()}</a>
-                <a href="#">${obj.getEmail()}</a>
+                <a href="mailto:${obj.getEmail()}">${obj.getEmail()}</a>
                 <a href="#">${obj.getOfficeNumber()}</a>
             </div>
         </div>
@@ -199,7 +199,7 @@ return `
   <div class="card-action">
     <a href="#">${obj.getId()}</a>
     <a href="#">${obj.getEmail()}</a>
-    <a href="#">${obj.getGitHub()}</a>
+    <a href="https://www.github.com/${obj.getGitHub()}" target="_blank">${obj.getGitHub()}</a>
   </div>
 </div>
 </div>
