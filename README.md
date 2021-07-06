@@ -14,13 +14,13 @@
   ## Description:
   ![licence](https://img.shields.io/badge/License-MIT-blue.svg "Licence Badge")
 
-    This app was created so that HR personnel can quickly generate a manager/employee tree using a simple inquirer dialog.
+    This app was created so that HR personnel can quickly generate a manager/employee tree, and send communication using a simple inquirer dialog.
 
   ## Installation:
     This app can be downloaded from the git repo listed below. Run the command "npm install" then run "node index.js" from a local terminal.
 
   ## Usage:
-    https://drive.google.com/file/d/1p5QlqqqGUJfiQs4b2MqCeoFSvYBgQIyO/view
+    ![usage video:](https://drive.google.com/file/d/1p5QlqqqGUJfiQs4b2MqCeoFSvYBgQIyO/view / GIF)
 
   ## Licence:
   NOTICE! - This application has the following licence type: ![licence](https://img.shields.io/badge/License-MIT-blue.svg "Licence Badge")
