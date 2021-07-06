@@ -64,7 +64,7 @@ const questionEngineer = [{
 {
     type: "input",
     name: "engGithub",
-    message: "What is the Engineer's GitHub account?",
+    message: "What is the Engineer's GitHub username?",
 },
 ];
 const questionIntern = [{
