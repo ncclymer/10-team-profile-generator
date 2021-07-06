@@ -20,6 +20,7 @@
     This app can be downloaded from the git repo listed below. Run the command "npm install" then run "node index.js" from a local terminal.
 
   ## Usage:
+    Link to usage video: https://drive.google.com/file/d/17fCSp0GOBi4KC8oodmm4CbSy5FpZI6jb/view
    ![Demo](assets/usage.gif)
 
   ## Licence:
