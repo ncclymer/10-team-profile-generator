@@ -20,7 +20,7 @@
     This app can be downloaded from the git repo listed below. Run the command "npm install" then run "node index.js" from a local terminal.
 
   ## Usage:
-    https://drive.google.com/file/d/1p5QlqqqGUJfiQs4b2MqCeoFSvYBgQIyO/view
+   ![usage](https://drive.google.com/file/d/17fCSp0GOBi4KC8oodmm4CbSy5FpZI6jb/view.gif)
 
   ## Licence:
   NOTICE! - This application has the following licence type: ![licence](https://img.shields.io/badge/License-MIT-blue.svg "Licence Badge")
